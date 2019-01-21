@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CardInfoActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!-- PERSONAL INFORMATION -->
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:textColor="#ffffff"
+                android:text="@string/card_info_title_personal"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="@string/card_info_holder_name"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/card_holder_name"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="@string/card_info_holder_birthdate"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/card_holder_birthdate"/>
+        </TableRow>
+
+
+        <!-- CARD INFORMATION -->
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:textColor="#ffffff"
+                android:text="@string/card_info_title_card"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="@string/card_info_viva_id"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/card_viva_card_id"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="@string/card_info_issuer"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/card_issuer"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="@string/card_info_issue_date"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/card_issue_date"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:text="@string/card_info_expiration_date"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/card_expiration_date"/>
+        </TableRow>
+
+
+        <!-- EVENT LOGS -->
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:textColor="#ffffff"
+                android:text="@string/card_info_title_logs"/>
+        </TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:id="@+id/logs_container">
+        </TableLayout>
+
+
+    </TableLayout>
+
+</ScrollView>

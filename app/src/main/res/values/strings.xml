@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">VivaNFC</string>
+    <string name="card_info_title_personal">Personal Information</string>
+    <string name="card_info_holder_name">Name</string>
+    <string name="card_info_holder_birthdate">Birth Date</string>
+    <string name="card_info_title_card">Card Information</string>
+    <string name="card_info_viva_id">Viva Card ID</string>
+    <string name="card_info_issuer">Issuer</string>
+    <string name="card_info_issue_date">Issue Date</string>
+    <string name="card_info_expiration_date">Expiration Date</string>
+    <string name="log_date">Date</string>
+    <string name="log_title">Log </string>
+    <string name="card_info_title_logs">Event Logs</string>
+    <string name="log_operator">Operator</string>
+    <string name="value_transition_in">Entry</string>
+    <string name="value_transition_out">Exit</string>
+    <string name="log_transition">Transition</string>
+    <string name="value_n_a">N/A</string>
+</resources>
