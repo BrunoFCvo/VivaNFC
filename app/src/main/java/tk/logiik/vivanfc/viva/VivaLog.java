@@ -43,6 +43,8 @@ public class VivaLog implements Parcelable {
         return operatorId;
     }
 
+
+
     // Parcelable stuff
 
     public static final Parcelable.Creator<VivaLog> CREATOR = new Parcelable.Creator<VivaLog>() {

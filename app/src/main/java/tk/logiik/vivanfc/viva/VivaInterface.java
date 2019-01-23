@@ -8,11 +8,12 @@ import java.nio.charset.StandardCharsets;
 import tk.logiik.vivanfc.apdu.APDUInterface;
 import tk.logiik.vivanfc.apdu.APDUOperationFailedException;
 import tk.logiik.vivanfc.util.BitReader;
+import tk.logiik.vivanfc.util.Formats;
 
 public class VivaInterface {
 
     public static VivaCard fetchData(IsoDep isoDep) throws IOException, APDUOperationFailedException {
-        byte[] name, environment, logs;
+        byte[] name, environment, logs, contracts;
 
         APDUInterface apdu = new APDUInterface(isoDep);
         VivaCard card = new VivaCard();
@@ -64,6 +65,35 @@ public class VivaInterface {
             logReader.skip(63);     // Unknown data
 
             card.addLog(log);
+        }
+
+        // Read all contracts
+        apdu.verify("0000");
+        apdu.resetSelection();
+        apdu.selectByPath("/2000/2020");
+        contracts = apdu.readAll();
+
+        BitReader contractReader = new BitReader(contracts);
+        while(contractReader.hasNext()) {
+            VivaContract contract = new VivaContract();
+
+            contract.setOperatorId(contractReader.readInt(7));
+            contract.setProductId(contractReader.readInt(16));
+            contractReader.skip(2);     // Unknown data
+            contractReader.skip(14);    // Start date
+            contractReader.skip(5);     // Sales point
+            contractReader.skip(19);    // Unknown data (sales info?)
+            contractReader.skip(16);    // Unknown data (period units?)
+            contractReader.skip(14);    // Start/End date
+            contractReader.skip(7);     // Validity period
+            contractReader.skip(3);     // Unknown data
+            contractReader.skip(5);     // Operator 1
+            contractReader.skip(4);     // Combined type
+            contractReader.skip(11);    // Unknown data
+            contractReader.skip(5);     // Operator 2
+            contractReader.skip(5);     // Unknown data
+            contractReader.skip(5);     // Operator 2
+            contractReader.skip(94);    // Unknown data
         }
 
         apdu.close();
