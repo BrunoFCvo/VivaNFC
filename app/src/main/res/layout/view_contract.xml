@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp"
+        android:background="@color/colorSecondary">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary"
+            android:id="@+id/contract_operator"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/contract_product"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/contract_product"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/contract_point_of_sale"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/contract_point_of_sale"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/contract_start_date"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/contract_start_date"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/contract_end_date"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/contract_end_date"/>
+    </TableRow>
+
+
+</TableLayout>

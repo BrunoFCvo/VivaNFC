@@ -9,15 +9,9 @@
         android:background="@color/colorSecondary">
         <TextView
             android:layout_width="match_parent"
-            android:layout_weight="0"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/log_title"/>
-        <TextView
-            android:layout_width="match_parent"
             android:layout_weight="1"
-            android:text="1"
             android:textColor="@color/colorPrimary"
-            android:id="@+id/log_id"/>
+            android:id="@+id/log_date"/>
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -25,11 +19,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:text="@string/log_date"/>
+            android:text="@string/log_contract"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:id="@+id/log_date"/>
+            android:id="@+id/logs_contract"/>
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -54,6 +48,42 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:id="@+id/log_operator"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/log_reader_id"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/log_reader_id"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/log_line"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/log_line"/>
+    </TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/log_station"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/log_station"/>
     </TableRow>
 
 

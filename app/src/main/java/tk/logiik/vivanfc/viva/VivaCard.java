@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class VivaCard implements Parcelable {
 
@@ -23,11 +24,16 @@ public class VivaCard implements Parcelable {
     // Logs
     private List<VivaLog> logs;
 
-    public VivaCard() {
-        logs = new LinkedList<>();
+    // Contracts
+    private List<VivaContract> contracts;
+
+    VivaCard() {
+        logs        = new LinkedList<>();
+        contracts   = new LinkedList<>();
     }
 
 
+    // name
     public void setName(String name) {
         this.name = name;
     }
@@ -36,9 +42,8 @@ public class VivaCard implements Parcelable {
         return name;
     }
 
-
-
-    public void setIssuerId(int issuerId) {
+    // issuer id
+    void setIssuerId(int issuerId) {
         this.issuerId = issuerId;
     }
 
@@ -46,9 +51,8 @@ public class VivaCard implements Parcelable {
         return issuerId;
     }
 
-
-
-    public void setIssueDate(Date issueDate) {
+    // issue date
+    void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
 
@@ -56,9 +60,8 @@ public class VivaCard implements Parcelable {
         return issueDate;
     }
 
-
-
-    public void setExpirationDate(Date expirationDate) {
+    // expiration date
+    void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -66,29 +69,27 @@ public class VivaCard implements Parcelable {
         return expirationDate;
     }
 
-
-
-    public void setBirthDate(Date birthDate) {
+    // birth date
+    void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Date getHolderBirthdate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-
-
-    public void setVivaCardId(int vivaCardId) {
+    // viva card id
+    void setVivaCardId(int vivaCardId) {
         this.vivaCardId = vivaCardId;
     }
 
     public String getVivaCardId() {
-        return String.format("%03d", issuerId) + " " + String.format("%09d", vivaCardId);
+        return String.format(Locale.getDefault(), "%03d", issuerId) + " " +
+                String.format(Locale.getDefault(), "%09d", vivaCardId);
     }
 
-
-
-    public void addLog(VivaLog log) {
+    // logs
+    void addLog(VivaLog log) {
         logs.add(log);
     }
 
@@ -96,9 +97,18 @@ public class VivaCard implements Parcelable {
         return logs.iterator();
     }
 
+    // contracts
+    void addContract(VivaContract contract) {
+        contracts.add(contract);
+    }
+
+    public Iterator<VivaContract> getContractIterator()  {
+        return contracts.iterator();
+    }
+
+
 
     // Parcelable stuff
-
     public static final Parcelable.Creator<VivaCard> CREATOR = new Parcelable.Creator<VivaCard>() {
         public VivaCard createFromParcel(Parcel in) {
             return new VivaCard(in);
@@ -128,6 +138,11 @@ public class VivaCard implements Parcelable {
         for(VivaLog l : logs) {
             out.writeParcelable(l, 0);
         }
+
+        out.writeInt(contracts.size());
+        for(VivaContract c : contracts) {
+            out.writeParcelable(c, 0);
+        }
     }
 
     private VivaCard(Parcel in) {
@@ -139,11 +154,16 @@ public class VivaCard implements Parcelable {
         expirationDate  = (Date) in.readSerializable();
         birthDate       = (Date) in.readSerializable();
 
-
         logs = new LinkedList<>();
-        int logSize = in.readInt();
-        for(int i = 0; i < logSize; i++) {
+        int logsSize = in.readInt();
+        for(int i = 0; i < logsSize; i++) {
             logs.add((VivaLog) in.readParcelable(VivaLog.class.getClassLoader()));
+        }
+
+        contracts = new LinkedList<>();
+        int contractsSize = in.readInt();
+        for(int i = 0; i < contractsSize; i++) {
+            contracts.add((VivaContract) in.readParcelable(VivaContract.class.getClassLoader()));
         }
     }
 

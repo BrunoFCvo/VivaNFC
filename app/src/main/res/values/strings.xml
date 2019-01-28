@@ -16,4 +16,15 @@
     <string name="value_transition_out">Exit</string>
     <string name="log_transition">Transition</string>
     <string name="value_n_a">N/A</string>
+    <string name="value_unknown_id">Unknown [%d]</string>
+    <string name="log_reader_id">Reader ID</string>
+    <string name="log_line">Line</string>
+    <string name="log_station">Station</string>
+    <string name="log_contract">Contract</string>
+    <string name="card_info_title_contracts">Contracts</string>
+    <string name="value_multiple_operators">Multiple Operators</string>
+    <string name="contract_product">Product</string>
+    <string name="contract_point_of_sale">Point of Sale</string>
+    <string name="contract_start_date">Start Date</string>
+    <string name="contract_end_date">Expiration Date</string>
 </resources>

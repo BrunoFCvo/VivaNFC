@@ -4,11 +4,12 @@ import android.nfc.tech.IsoDep;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import tk.logiik.vivanfc.apdu.APDUInterface;
 import tk.logiik.vivanfc.apdu.APDUOperationFailedException;
 import tk.logiik.vivanfc.util.BitReader;
-import tk.logiik.vivanfc.util.Formats;
+import tk.logiik.vivanfc.viva.values.VivaValues;
 
 public class VivaInterface {
 
@@ -48,21 +49,35 @@ public class VivaInterface {
         logs = apdu.readAll();
 
         BitReader logReader = new BitReader(logs);
-        while(logReader.hasNext()) {
+        while (logReader.hasNext()) {
             VivaLog log = new VivaLog();
 
-            log.setDate(logReader.readDate(30));
-            logReader.skip(38);     // Unknown data (contract signature ?)
-            logReader.skip(4);      // Contract used
-            logReader.skip(24);     // Unknown data (card pre-set info ?)
-            logReader.skip(5);      // Unknown data
-            log.setTransitionId(logReader.readInt(3));
-            log.setOperatorId(logReader.readInt(5));
-            logReader.skip(20);     // Unknown data (vehicle data?)
-            logReader.skip(16);     // Reader Id
-            logReader.skip(16);     // Line
-            logReader.skip(8);      // Station
-            logReader.skip(63);     // Unknown data
+            Date date       = logReader.readDate(30);
+                              logReader.skip(38);       // Unknown data (contract signature ?)
+            int contractId  = logReader.readInt(4);
+                              logReader.skip(24);       // Unknown data (card pre-set info ?)
+                              logReader.skip(5);        // Unknown data
+            int transitionId= logReader.readInt(3);
+            int operatorId  = logReader.readInt(5);
+                              logReader.skip(20);       // Unknown data (vehicle data?)
+            int readerId    = logReader.readInt(16);
+            int lineId      = logReader.readInt(16);
+            int stationId;
+            if (operatorId == VivaValues.OPERATOR_ML) {
+                stationId   = logReader.readInt(6);
+                              logReader.skip(2);
+            } else {
+                stationId   = logReader.readInt(8);
+            }
+                              logReader.skip(63);
+
+            log.setDate(date);
+            log.setContractId(contractId);
+            log.setTransitionId(transitionId);
+            log.setOperatorId(operatorId);
+            log.setReaderId(readerId);
+            log.setLineId(lineId);
+            log.setStationId(stationId);
 
             card.addLog(log);
         }
@@ -74,26 +89,38 @@ public class VivaInterface {
         contracts = apdu.readAll();
 
         BitReader contractReader = new BitReader(contracts);
-        while(contractReader.hasNext()) {
+        while (contractReader.hasNext()) {
             VivaContract contract = new VivaContract();
 
-            contract.setOperatorId(contractReader.readInt(7));
-            contract.setProductId(contractReader.readInt(16));
-            contractReader.skip(2);     // Unknown data
-            contractReader.skip(14);    // Start date
-            contractReader.skip(5);     // Sales point
-            contractReader.skip(19);    // Unknown data (sales info?)
-            contractReader.skip(16);    // Unknown data (period units?)
-            contractReader.skip(14);    // Start/End date
-            contractReader.skip(7);     // Validity period
-            contractReader.skip(3);     // Unknown data
-            contractReader.skip(5);     // Operator 1
-            contractReader.skip(4);     // Combined type
-            contractReader.skip(11);    // Unknown data
-            contractReader.skip(5);     // Operator 2
-            contractReader.skip(5);     // Unknown data
-            contractReader.skip(5);     // Operator 2
-            contractReader.skip(94);    // Unknown data
+            int operatorId      = contractReader.readInt(7);
+            if (operatorId == 0) {
+                contractReader.skip(225);
+                continue;
+            }
+            int productId       = contractReader.readInt(16);
+                                  contractReader.skip(2);       // Unknown data
+            Date startDate      = contractReader.readDateDays(14);
+            int pointOfSaleId   = contractReader.readInt(5);
+                                  contractReader.skip(19);      // Unknown data (sales info?)
+            int unitsId         = contractReader.readInt(16);
+                                  contractReader.skip(14);      // Unknown data (start/end date)
+            int validity        = contractReader.readInt(7);
+                                  contractReader.skip(3);       // Unknown data
+                                  contractReader.skip(5);       // Operator 1
+                                  contractReader.skip(4);       // Combined type
+                                  contractReader.skip(11);      // Unknown data
+                                  contractReader.skip(5);       // Operator 2
+                                  contractReader.skip(5);       // Unknown data
+                                  contractReader.skip(5);       // Operator 2
+                                  contractReader.skip(94);      // Unknown data
+
+            contract.setOperatorId(operatorId);
+            contract.setProductId(productId);
+            contract.setStartDate(startDate);
+            contract.setPointOfSaleId(pointOfSaleId);
+            contract.setEndDate(startDate, unitsId, validity);
+
+            card.addContract(contract);
         }
 
         apdu.close();

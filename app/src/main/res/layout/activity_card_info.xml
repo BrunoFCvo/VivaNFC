@@ -127,6 +127,23 @@
         </TableLayout>
 
 
+        <!-- CONTRACTS -->
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:textColor="#ffffff"
+                android:text="@string/card_info_title_contracts"/>
+        </TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:id="@+id/contracts_container">
+        </TableLayout>
+
+
     </TableLayout>
 
 </ScrollView>
