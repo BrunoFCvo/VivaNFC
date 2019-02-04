@@ -3,9 +3,10 @@ package tk.logiik.vivanfc.viva;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class VivaLog implements Parcelable {
+public class VivaLog implements Parcelable, Serializable {
 
     private Date date;
     private int contractId;

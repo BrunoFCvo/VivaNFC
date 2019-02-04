@@ -3,13 +3,14 @@ package tk.logiik.vivanfc.viva;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-public class VivaCard implements Parcelable {
+public class VivaCard implements Parcelable, Serializable {
 
     // Name
     private String name;

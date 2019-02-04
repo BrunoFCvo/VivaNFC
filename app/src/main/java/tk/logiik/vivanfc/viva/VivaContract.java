@@ -3,12 +3,13 @@ package tk.logiik.vivanfc.viva;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 import tk.logiik.vivanfc.viva.values.VivaValues;
 
-public class VivaContract implements Parcelable {
+public class VivaContract implements Parcelable, Serializable {
 
     private static final long MILLISECONDS_DAY = 86400000L;    // 24 * 60 * 60 * 1000
 

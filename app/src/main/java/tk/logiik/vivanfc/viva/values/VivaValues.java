@@ -13,16 +13,25 @@ public class VivaValues {
     public static final int PERIOD_DAYS     = 265;
     public static final int PERIOD_MONTHS   = 266;
 
-    public static final int OPERATOR_CARRIS = 1;
-    public static final int OPERATOR_ML = 2;
-    //TODO add other operators as constants
+    public static final int OPERATOR_CARRIS     = 1;
+    public static final int OPERATOR_ML         = 2;
+    public static final int OPERATOR_CP         = 3;
+    public static final int OPERATOR_TRANSTEJO  = 4;
+    public static final int OPERATOR_TST        = 5;
+    public static final int OPERATOR_RL         = 6;
+    public static final int OPERATOR_SOFLUSA    = 7;
+    public static final int OPERATOR_TCB        = 8;
+    public static final int OPERATOR_VIMECA     = 9;
+    public static final int OPERATOR_BARRAQUEIRO= 13;
+    public static final int OPERATOR_FERTAGUS   = 15;
+    public static final int OPERATOR_MTS        = 16;
 
     public static final String OPERATOR_MULTIPLE = "MULTIPLE_OP";
 
     private Map<Integer, Operator>  operators;
     private Map<Integer, String> pointsOfSale;
 
-    public VivaValues() {
+    private VivaValues() {
         operators = new TreeMap<>();
 
         setupCarris();
@@ -30,7 +39,7 @@ public class VivaValues {
         setupCP();
         setupTranstejo();
         setupTST();
-        setupRodoviariaLisboa();
+        setupRL();
         setupSoflusa();
         setupTCB();
         setupVimeca();
@@ -133,42 +142,42 @@ public class VivaValues {
 
     private void setupCP() {
         Operator operator = new Operator("CP");
-        operators.put(3, operator);
+        operators.put(OPERATOR_CP, operator);
     }
 
     private void setupTranstejo() {
         Operator operator = new Operator("Transtejo");
-        operators.put(4, operator);
+        operators.put(OPERATOR_TRANSTEJO, operator);
     }
 
     private void setupTST() {
         Operator operator = new Operator("Transportes Sul do Tejo");
-        operators.put(5, operator);
+        operators.put(OPERATOR_TST, operator);
     }
 
-    private void setupRodoviariaLisboa() {
+    private void setupRL() {
         Operator operator = new Operator("Rodoviária de Lisboa");
-        operators.put(6, operator);
+        operators.put(OPERATOR_RL, operator);
     }
 
     private void setupSoflusa() {
         Operator operator = new Operator("Soflusa");
-        operators.put(7, operator);
+        operators.put(OPERATOR_SOFLUSA, operator);
     }
 
     private void setupTCB() {
         Operator operator = new Operator("Transportes Colectivos do Barreiro");
-        operators.put(8, operator);
+        operators.put(OPERATOR_TCB, operator);
     }
 
     private void setupVimeca() {
         Operator operator = new Operator("Vimeca");
-        operators.put(9, operator);
+        operators.put(OPERATOR_VIMECA, operator);
     }
 
     private void setupBarraqueiro() {
         Operator operator = new Operator("Barraqueiro");
-        operators.put(13, operator);
+        operators.put(OPERATOR_BARRAQUEIRO, operator);
     }
 
     private void setupFertagus() {
@@ -193,7 +202,7 @@ public class VivaValues {
 
         operator.addProduct(6150,   "Fertagus FRA-PRA (4_18/Sub23)");
 
-        operators.put(15, operator);
+        operators.put(OPERATOR_FERTAGUS, operator);
     }
 
     private void setupMTS() {
@@ -246,7 +255,7 @@ public class VivaValues {
         operator.addProduct(6100,    "Passe MTS (4_18/Sub23)");
         operator.addProduct(6101,    "Complemento MTS (4_18/Sub23)");
 
-        operators.put(16, operator);
+        operators.put(OPERATOR_MTS, operator);
     }
 
     private void setupMultipleOperators() {

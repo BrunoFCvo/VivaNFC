@@ -61,13 +61,25 @@ public class VivaInterface {
             int operatorId  = logReader.readInt(5);
                               logReader.skip(20);       // Unknown data (vehicle data?)
             int readerId    = logReader.readInt(16);
-            int lineId      = logReader.readInt(16);
+
+            int lineId;
+            switch (operatorId) {
+                case VivaValues.OPERATOR_MTS :
+                              logReader.skip(14);
+                    lineId  = logReader.readInt(2);
+                    break;
+                default :
+                    lineId  = logReader.readInt(16);
+            }
+
             int stationId;
-            if (operatorId == VivaValues.OPERATOR_ML) {
-                stationId   = logReader.readInt(6);
-                              logReader.skip(2);
-            } else {
-                stationId   = logReader.readInt(8);
+            switch (operatorId) {
+                case VivaValues.OPERATOR_ML :
+                    stationId   = logReader.readInt(6);
+                                  logReader.skip(2);
+                    break;
+                default :
+                    stationId   = logReader.readInt(8);
             }
                               logReader.skip(63);
 
