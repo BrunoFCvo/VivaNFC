@@ -1,14 +1,14 @@
 package tk.logiik.vivanfc;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -25,10 +25,24 @@ import tk.logiik.vivanfc.viva.values.VivaValues;
 
 public class CardInfoActivity extends AppCompatActivity {
 
+    private View tabHome;
+    private View tabEvents;
+    private View tabContacts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_info);
+
+        // Handle tabs
+
+        tabHome = findViewById(R.id.tab_home);
+        tabEvents = findViewById(R.id.tab_events);
+        tabContacts = findViewById(R.id.tab_contracts);
+        BottomNavigationView navigation = findViewById(R.id.card_info_navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // Handle content
 
         VivaValues vivaValues = VivaValues.singleton;
         VivaCard card = getIntent().getParcelableExtra(VivaNFC.CARD_PARCELABLE);
@@ -140,6 +154,32 @@ public class CardInfoActivity extends AppCompatActivity {
             contractsContainerLayout.addView(contractView);
         }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    tabHome.setVisibility(View.VISIBLE);
+                    tabEvents.setVisibility(View.GONE);
+                    tabContacts.setVisibility(View.GONE);
+                    return true;
+                case R.id.navigation_events:
+                    tabHome.setVisibility(View.GONE);
+                    tabEvents.setVisibility(View.VISIBLE);
+                    tabContacts.setVisibility(View.GONE);
+                    return true;
+                case R.id.navigation_contracts:
+                    tabHome.setVisibility(View.GONE);
+                    tabEvents.setVisibility(View.GONE);
+                    tabContacts.setVisibility(View.VISIBLE);
+                    return true;
+            }
+            return false;
+        }
+    };
 
     private String formatDate(Date date) {
         Calendar calendar = Calendar.getInstance();

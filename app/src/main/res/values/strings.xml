@@ -27,4 +27,7 @@
     <string name="contract_point_of_sale">Point of Sale</string>
     <string name="contract_start_date">Start Date</string>
     <string name="contract_end_date">Expiration Date</string>
+    <string name="card_info_tab_home">Home</string>
+    <string name="card_info_tab_events">Events</string>
+    <string name="card_info_tab_contracts">Contracts</string>
 </resources>
